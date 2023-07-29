@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <h1>My Cart</h1>
+    <div id="cartItems">
+      <!-- Cart items will be displayed here based on data in local storage -->
+    </div>
+    <button id="checkoutButton">Checkout</button>
+
+    <script>
+      // Retrieve cart items from local storage
+      const cartItems = JSON.parse(localStorage.getItem("cartItems")) || [];
+
+      function displayCartItems() {
+        const cartItemsDiv = document.getElementById("cartItems");
+        cartItemsDiv.innerHTML = "";
+
+        cartItems.forEach((item) => {
+          const cartItemDiv = document.createElement("div");
+          cartItemDiv.innerHTML = `
+            <p>Name: ${item.name}</p>
+            <p>Price: $${item.price}</p>
+            <button onclick="removeFromCart(${item.id})">Remove</button>
+          `;
+          cartItemsDiv.appendChild(cartItemDiv);
+        });
+      }
+
+      // Display cart items on page load
+      displayCartItems();
+
+      function removeFromCart(itemId) {
+        const updatedCartItems = cartItems.filter((item) => item.id !== itemId);
+        localStorage.setItem("cartItems", JSON.stringify(updatedCartItems));
+        displayCartItems();
+      }
+
+      document
+        .getElementById("checkoutButton")
+        .addEventListener("click", function () {
+          // Implement the checkout process here (e.g., using Razorpay integration)
+          alert("Checkout functionality is not implemented in this example.");
+        });
+    </script>
+  </body>
+</html>

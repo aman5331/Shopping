@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <h1>User Profile</h1>
+    <div id="userInfo">
+      <!-- User information will be displayed here based on data in local storage -->
+    </div>
+    <button onclick="editProfile()">Edit Profile</button>
+
+    <script>
+      // Retrieve user data from local storage
+      const currentUser = JSON.parse(localStorage.getItem("currentUser"));
+
+      function displayUserProfile() {
+        const userInfoDiv = document.getElementById("userInfo");
+        userInfoDiv.innerHTML = `
+        <p>First Name: ${currentUser.firstName}</p>
+        <p>Last Name: ${currentUser.lastName}</p>
+        <p>Email: ${currentUser.email}</p>
+      `;
+      }
+
+      // Display user information on page load
+      displayUserProfile();
+
+      function editProfile() {
+        // Implement the editing functionality here (e.g., using form fields)
+        alert("Editing functionality is not implemented in this example.");
+      }
+    </script>
+  </body>
+</html>
